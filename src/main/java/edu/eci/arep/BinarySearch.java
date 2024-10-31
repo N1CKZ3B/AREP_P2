@@ -16,13 +16,24 @@ public class BinarySearch {
                 }
             }
         }
-
+        return arr;
     }
 
 
+    public int binS(int[] arr , int num){
+        int m = arr.length / 2;
+        if (arr[m] == num){
+            return m;
+        }else if ( arr[m] > num){
+           return binS(arr,num);
+        }else{
+            return binS(arr,num);
+        }
+    }
 
-
-    public int BinarySearch(int[] arr, int num){
+    public int BinarySearch(int[] arr, int num) {
         int[] array = ordenar(arr);
+
+        return binS(arr,num);
     }
 }
