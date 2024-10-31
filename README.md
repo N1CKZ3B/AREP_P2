@@ -8,6 +8,9 @@ Se crea la aplicación con los requisitos suficientes para poder ejecutarse, se 
 ![image](https://github.com/user-attachments/assets/20afe675-8c8a-4d88-a493-aa4cea92d6ca)
 
 
+Es verdad que la ejecución de la aplicación no es satisfactoria y las dependencias a pesar de que no generen ningun error, no termina generando absolutamente ninguna aplicacion que sea funcional y que en ningun momento pueda ser desplegada para poder ejecutarse como deberia.
+
+
 
 
 
