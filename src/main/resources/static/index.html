@@ -1,63 +1,176 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Form Example</title>
+    <title>Algoritmos de Búsqueda</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f5f5;
+            --border-radius: 8px;
+            --spacing: 20px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 30px;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: var(--spacing);
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-section {
+            margin-bottom: 40px;
+            padding: var(--spacing);
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid #e1e4e8;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 24px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        }
+
+        input[type="button"] {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        input[type="button"]:hover {
+            background-color: #357abd;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .search-section {
+                padding: 15px;
+            }
+
+            input[type="button"] {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<h1>Linear Search</h1>
-<form action="/linearsearch">
-    <label for="List">List of numbers:</label><br>
-    <input type="text" id="list" name="list" placeholder="5,4,3,5,9"><br><br>
-    <label for="value">Value to search(In case that the number doesn´t part of the list the result is
-        -1):</label><br>
-    <input type="text" id="value" name="value" placeholder="5"><br><br>
-    <input type="button" value="Submit" onclick="loadGetLinearSearch()">
-</form>
-<div id="getLinearSearch"></div>
+<div class="container">
+    <div class="search-section">
+        <h1>Búsqueda Lineal</h1>
+        <form action="/linearsearch">
+            <label for="list">Lista de números:</label>
+            <input type="text" id="list" name="list" placeholder="Ejemplo: 5,4,3,5,9">
 
-<h1>Binary Search</h1>
-<form action="/binarysearch">
-    <label for="ListBinary">List of numbers:</label><br>
-    <input type="text" id="listBinary" name="listBinary" placeholder="5,4,3,5,9"><br><br>
-    <label for="valueBinary">Value to search(In case that the number doesn´t part of the list the result is
-        -1):</label><br>
-    <input type="text" id="valueBinary" name="valueBinary" placeholder="5"><br><br>
-    <input type="button" value="Submit" onclick="loadGetBinarySearch()">
-</form>
-<div id="getrespmsg1"></div>
+            <label for="value">Valor a buscar:</label>
+            <input type="text" id="value" name="value" placeholder="Ejemplo: 5">
+            <small style="color: #666">Si el número no está en la lista, el resultado será -1</small>
+
+            <input type="button" value="Buscar" onclick="loadGetLinearSearch()">
+        </form>
+        <div id="getLinearSearch" class="result"></div>
+    </div>
+
+    <div class="search-section">
+        <h1>Búsqueda Binaria</h1>
+        <form action="/binarysearch">
+            <label for="listBinary">Lista de números:</label>
+            <input type="text" id="listBinary" name="listBinary" placeholder="Ejemplo: 5,4,3,5,9">
+
+            <label for="valueBinary">Valor a buscar:</label>
+            <input type="text" id="valueBinary" name="valueBinary" placeholder="Ejemplo: 5">
+            <small style="color: #666">Si el número no está en la lista, el resultado será -1</small>
+
+            <input type="button" value="Buscar" onclick="loadGetBinarySearch()">
+        </form>
+        <div id="getrespmsg1" class="result"></div>
+    </div>
+</div>
 
 <script>
     function loadGetLinearSearch() {
         let list = document.getElementById("list").value;
         let value = document.getElementById("value").value;
         const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            document.getElementById("getLinearSearch").innerHTML =
-                this.responseText;
+        xhttp.onload = function() {
+            document.getElementById("getLinearSearch").innerHTML = this.responseText;
         }
         xhttp.open("GET", "/proxy/linearsearch?list=" + list + "&value=" + value);
         xhttp.send();
     }
-</script>
 
-
-<script>
     function loadGetBinarySearch() {
         let list = document.getElementById("listBinary").value;
         let value = document.getElementById("valueBinary").value;
         const xhttp = new XMLHttpRequest();
-        xhttp.onload = function () {
-            document.getElementById("getrespmsg1").innerHTML =
-                this.responseText;
+        xhttp.onload = function() {
+            document.getElementById("getrespmsg1").innerHTML = this.responseText;
         }
         xhttp.open("GET", "/proxy/binarysearch?list=" + list + "&value=" + value);
         xhttp.send();
     }
 </script>
 </body>
-
 </html>
