@@ -1,8 +1,12 @@
 package edu.eci.arep;
 
 public class BinarySearch {
+    int result;
+    public BinarySearch(int[] array, int target){
+        result= binarySearch(array, target);
+    }
 
-    public int binarySearchImplementation(int[] array, int target) {
+    private int binarySearch(int[] array, int target) {
         int left = 0;
         int rigth = array.length -1;
 
@@ -20,5 +24,9 @@ public class BinarySearch {
 
         return -1;
 
+    }
+
+    public int getResult(){
+        return result;
     }
 }
